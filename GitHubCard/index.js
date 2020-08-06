@@ -1,8 +1,17 @@
+import axios from "axios"
+
 /*
   STEP 1: using axios, send a GET request to the following URL
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
+axios.get("https://api.github.com/users/ericagirges")
+.then(function(response) {
+  console.log(response)
+})
+.catch(function(error) {
+  debugger
+})
 
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
@@ -12,10 +21,45 @@
     Skip to STEP 3.
 */
 
+function gitHubCardGen (object){
+
+  //create new elements
+  const userCard = document.createElement("div");
+  const image = document.createElement("img");
+  const cardInfo = document.createElement("div");
+  const name = document.createElement("h3");
+  const username = document.createElement("p");
+  const location = document.createElement("p");
+  const profile = document.createElement("p");
+  const profileLink = document.createElement("a");
+  const followers = document.createElement("p");
+  const following = document.createElement("p");
+  const bio = document.createElement("p");
+
+  //setting class names, attributes and text
+  userCard.classList.add("card");
+  image.setAttribute("src", "data[avatar_url]");
+  cardInfo.classList.add("card-info");
+  name.classList.add("name");
+  name.textContent = "data[name]";
+  username.classList.add("username");
+  username.textContent = "data[login]";
+  location.textContent = `Location: ${data[location]}`;
+  profile.textContent = "Profile: ";
+  profileLink.setAttribute("href", )
+
+
+
+
+
+}
+
 /*
   STEP 4: Pass the data received from Github into your function,
     and append the returned markup to the DOM as a child of .cards
 */
+
+
 
 /*
   STEP 5: Now that you have your own card getting added to the DOM, either
