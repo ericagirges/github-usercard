@@ -21,6 +21,26 @@ axios.get("https://api.github.com/users/ericagirges")
     Skip to STEP 3.
 */
 
+/*
+  STEP 3: Create a function that accepts a single object as its only argument.
+    Using DOM methods and properties, create and return the following markup:
+
+    <div class="card">
+      <img src={image url of user} />
+      <div class="card-info">
+        <h3 class="name">{users name}</h3>
+        <p class="username">{users user name}</p>
+        <p>Location: {users location}</p>
+        <p>Profile:
+          <a href={address to users github page}>{address to users github page}</a>
+        </p>
+        <p>Followers: {users followers count}</p>
+        <p>Following: {users following count}</p>
+        <p>Bio: {users bio}</p>
+      </div>
+    </div>
+*/
+
 function gitHubCardGen(object) {
 
   //create new elements
@@ -97,27 +117,21 @@ axios.get("https://api.github.com/users/ericagirges")
     user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = ["https://api.github.com/users/richardgirges", "https://api.github.com/users/saljahmi", "https://api.github.com/users/Cory-Thomas", "https://api.github.com/users/ntilbe", "https://api.github.com/users/jgarrow"];
 
-/*
-  STEP 3: Create a function that accepts a single object as its only argument.
-    Using DOM methods and properties, create and return the following markup:
 
-    <div class="card">
-      <img src={image url of user} />
-      <div class="card-info">
-        <h3 class="name">{users name}</h3>
-        <p class="username">{users user name}</p>
-        <p>Location: {users location}</p>
-        <p>Profile:
-          <a href={address to users github page}>{address to users github page}</a>
-        </p>
-        <p>Followers: {users followers count}</p>
-        <p>Following: {users following count}</p>
-        <p>Bio: {users bio}</p>
-      </div>
-    </div>
-*/
+followersArray.forEach(user => {
+  axios.get(user)
+  .then(function(response) {
+    const newCard = gitHubCardGen(response.data)
+    const allCards = document.querySelector(".cards");
+    allCards.appendChild(newCard)
+    return newCard
+  })
+  .catch(function(error) {
+    debugger
+  })
+})
 
 /*
   List of LS Instructors Github username's:
