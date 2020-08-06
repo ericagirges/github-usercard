@@ -21,7 +21,7 @@ axios.get("https://api.github.com/users/ericagirges")
     Skip to STEP 3.
 */
 
-function gitHubCardGen (object){
+function gitHubCardGen(object) {
 
   //create new elements
   const userCard = document.createElement("div");
@@ -38,19 +38,33 @@ function gitHubCardGen (object){
 
   //setting class names, attributes and text
   userCard.classList.add("card");
-  image.setAttribute("src", "data[avatar_url]");
+  image.setAttribute("src", object.avatar_url);
   cardInfo.classList.add("card-info");
   name.classList.add("name");
-  name.textContent = "data[name]";
+  name.textContent = object.name;
   username.classList.add("username");
-  username.textContent = "data[login]";
-  location.textContent = `Location: ${data[location]}`;
+  username.textContent = object.login;
+  location.textContent = `Location: ${object.location}`;
   profile.textContent = "Profile: ";
-  profileLink.setAttribute("href", )
+  profileLink.setAttribute("href", object.html_url);
+  profileLink.textContent = object.html_url;
+  followers.textContent = `Followers: ${object.followers}`;
+  following.textContent = `Following: ${object.following}`;
+  bio.textContent = `Bio: ${object.bio}`;
 
+  // nest elements appropriately
+  userCard.appendChild(image);
+  userCard.appendChild(cardInfo);
+  cardInfo.appendChild(name);
+  cardInfo.appendChild(username);
+  cardInfo.appendChild(location);
+  cardInfo.appendChild(profile);
+  profile.appendChild(profileLink);
+  cardInfo.appendChild(followers);
+  cardInfo.appendChild(following);
+  cardInfo.appendChild(bio);
 
-
-
+  return userCard
 
 }
 
@@ -58,6 +72,17 @@ function gitHubCardGen (object){
   STEP 4: Pass the data received from Github into your function,
     and append the returned markup to the DOM as a child of .cards
 */
+axios.get("https://api.github.com/users/ericagirges")
+.then(function(response) {
+  const newCard = gitHubCardGen(response.data)
+  const allCards = document.querySelector(".cards");
+  allCards.appendChild(newCard)
+  return newCard
+})
+.catch(function(error) {
+  debugger
+})
+
 
 
 
